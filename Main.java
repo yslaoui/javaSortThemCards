@@ -1,5 +1,10 @@
 package sortThemCards;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Card first = new Card(2, Suit.Heart);
@@ -33,5 +38,33 @@ public class Main {
         else {
             System.out.println("Hands are equal");
         }
+
+        System.out.println("Sorting cards by suit");
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(1, Suit.Heart));
+        cards.add(new Card(2, Suit.Spade));
+        cards.add(new Card(15, Suit.Diamond));
+        cards.add(new Card(16, Suit.Club));
+        cards.add(new Card(12, Suit.Spade));
+        cards.add(new Card(6, Suit.Heart));
+        cards.add(new Card(4, Suit.Diamond));
+        cards.add(new Card(4, Suit.Club));
+
+        System.out.println("Initial cards");
+        System.out.println(cards);
+
+//        Collections.sort(cards, new SortBySuit());
+//        System.out.println(cards);
+
+        Comparator<Card> BySuitInValueOrder = Comparator.
+                                                comparing(Card::getSuit).
+                                                thenComparing(Card::getValue);
+
+        Collections.sort(cards, BySuitInValueOrder);
+        System.out.println("Cards after sorting");
+        System.out.println(cards);
+
+
+
     }
 }
